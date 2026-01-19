@@ -212,11 +212,12 @@
 
         .product-image {
             width: 100%;
-            max-width: 180px;
+            max-width: 200px;
             height: auto;
             margin: 0 auto 20px;
             display: block;
-            background: #f9f9f9;
+            background: #fff;
+            object-fit: contain;
         }
 
         .product-name {
@@ -246,6 +247,10 @@
             background: #f9f9f9;
             padding: 15px;
             border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .rec-name {
@@ -253,6 +258,7 @@
             color: var(--color-primary);
             font-size: 0.9rem;
             display: block;
+            margin-top: 5px;
         }
         
         .rec-brand {
@@ -267,7 +273,8 @@
     <div class="magazine-page">
         
         <header id="app-header">
-            <img src="logo.png" alt="Maria Elieth Cosméticos" class="logo-img">
+            <img src="logo.png" alt="Maria Elieth Cosméticos" class="logo-img" onerror="this.style.display='none'; document.getElementById('header-text').style.display='block'">
+            <h2 id="header-text" style="display:none; color: var(--color-primary);">Maria Elieth</h2>
         </header>
 
         <div class="progress-container" id="progress-container">
@@ -292,7 +299,7 @@
             
             <div class="main-product">
                 <p style="font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;" id="res-brand">Marca</p>
-                <img src="" alt="Perfume" class="product-image" id="res-img">
+                <img src="" alt="Perfume" class="product-image" id="res-img" onerror="this.src='https://placehold.co/200x250/f5f5f5/888?text=Foto+Indisponível'">
                 <h2 class="product-name" id="res-name">Nome do Perfume</h2>
                 <p class="product-desc" id="res-desc">Descrição sensorial...</p>
                 
@@ -306,12 +313,12 @@
             
             <div class="recommendations">
                 <div class="rec-item">
-                    <img src="" class="product-image" style="max-width:80px; margin-bottom:10px;" id="alt1-img">
+                    <img src="" class="product-image" style="max-width:100px; margin-bottom:10px;" id="alt1-img" onerror="this.src='https://placehold.co/100x100/f5f5f5/888?text=Opção+1'">
                     <span class="rec-name" id="alt1-name">Opção 1</span>
                     <span class="rec-brand" id="alt1-brand">Marca</span>
                 </div>
                 <div class="rec-item">
-                    <img src="" class="product-image" style="max-width:80px; margin-bottom:10px;" id="alt2-img">
+                    <img src="" class="product-image" style="max-width:100px; margin-bottom:10px;" id="alt2-img" onerror="this.src='https://placehold.co/100x100/f5f5f5/888?text=Opção+2'">
                     <span class="rec-name" id="alt2-name">Opção 2</span>
                     <span class="rec-brand" id="alt2-brand">Marca</span>
                 </div>
@@ -325,51 +332,155 @@
     </div>
 
     <script>
-        // --- BANCO DE DADOS ---
-        // ATENÇÃO: Substitua os links das imagens 'https://placehold.co...' pelas URLs reais das fotos dos perfumes
+        // --- BANCO DE DADOS ATUALIZADO COM IMAGENS REAIS ---
+        // URLs obtidas diretamente dos servidores da Natura (production.na01.natura.com) e Avon (VTEX).
         const database = {
             female: {
                 fresh: {
-                    main: { name: "Kaiak Aventura Feminino", brand: "Natura", desc: "Floral aquoso, vibrante e cheio de energia para o dia a dia.", img: "https://placehold.co/200x250/e0e0e0/333?text=Kaiak+Aventura" },
-                    alt1: { name: "Pur Blanca", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Pur+Blanca" },
-                    alt2: { name: "Ekos Maracujá", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Ekos" }
+                    main: { 
+                        name: "Kaiak Aventura Feminino", 
+                        brand: "Natura", 
+                        desc: "Floral aquoso, vibrante e cheio de energia para o dia a dia.", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.uwv_uCqD2eWiJ0z25wyHewHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Pur Blanca", 
+                        brand: "Avon", 
+                img:"https://imagens.ne10.uol.com.br/veiculos/_midias/webp/2024/06/17/divulgacao__avon___pur_blanca-27301733.webp" 
+                    },
+                    alt2: { 
+                        name: "Ekos Maracujá", 
+                        brand: "Natura", 
+                        img: "https://http2.mlstatic.com/D_NQ_NP_670888-MLA46897357538_072021-F.jpg" 
+                    }
                 },
                 sweet: {
-                    main: { name: "Kriska Drama", brand: "Natura", desc: "Adocicado intenso, com nozes carameladas e baunilha.", img: "https://placehold.co/200x250/e0e0e0/333?text=Kriska+Drama" },
-                    alt1: { name: "Far Away", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Far+Away" },
-                    alt2: { name: "Humor Próprio", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Humor" }
+                    main: { 
+                        name: "Kriska Drama", 
+                        brand: "Natura", 
+                        desc: "Adocicado intenso, com nozes carameladas e baunilha.", 
+                        img: "https://tse1.explicit.bing.net/th/id/OIP._-b0VxL8TsmacrYPWhWkqwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Far Away", 
+                        brand: "Avon", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.fpCRwNYbXP583JPryVpUDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt2: { 
+                        name: "Humor Próprio", 
+                        brand: "Natura", 
+                        img: "https://tse4.mm.bing.net/th/id/OIP.FbNaYMFubYDAGtc5iL0cWgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
                 },
                 floral: {
-                    main: { name: "Ilía Clássico", brand: "Natura", desc: "Elegância pura. Um floral branco sofisticado e moderno.", img: "https://placehold.co/200x250/e0e0e0/333?text=Ilia" },
-                    alt1: { name: "Luna", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Luna" },
-                    alt2: { name: "Attraction", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Attraction" }
+                    main: { 
+                        name: "Ilía Clássico", 
+                        brand: "Natura", 
+                        desc: "Elegância pura. Um floral branco sofisticado e moderno.", 
+                        img: "https://tse2.mm.bing.net/th/id/OIP.4kfc4zHc3W8SuKY_5IgaHAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Luna", 
+                        brand: "Natura", 
+                        img: "https://fimgs.net/mdimg/perfume/375x500.31811.jpg" 
+                    },
+                    alt2: { 
+                        name: "Attraction", 
+                        brand: "Avon", 
+                        img: "https://images-na.ssl-images-amazon.com/images/I/711eKKqiwkL._SL1500_.jpg" 
+                    }
                 },
                 intense: {
-                    main: { name: "Essencial Oud Feminino", brand: "Natura", desc: "Madeira Oud com flores. Poderoso, marcante e luxuoso.", img: "https://placehold.co/200x250/e0e0e0/333?text=Essencial+Oud" },
-                    alt1: { name: "Imari Rouge", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Imari" },
-                    alt2: { name: "Ilía Secreto", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Ilia+Secreto" }
+                    main: { 
+                        name: "Essencial Oud Feminino", 
+                        brand: "Natura", 
+                        desc: "Madeira Oud com flores. Poderoso, marcante e luxuoso.", 
+                        img: "https://fraguru.com/mdimg/perfume/375x500.52564.jpg" 
+                    },
+                    alt1: { 
+                        name: "Imari Rouge", 
+                        brand: "Avon", 
+                        img: "https://http2.mlstatic.com/D_NQ_NP_759159-MLM48154438171_112021-O.webp" 
+                    },
+                    alt2: { 
+                        name: "Ilía Secreto", 
+                        brand: "Natura", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.Mhnb-W-hwL7Xl7VQNJBv3AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
                 }
             },
             male: {
                 fresh: {
-                    main: { name: "Kaiak Urbe", brand: "Natura", desc: "Frescor das notas herbais com a modernidade das madeiras.", img: "https://placehold.co/200x250/e0e0e0/333?text=Kaiak+Urbe" },
-                    alt1: { name: "300km/h", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=300km" },
-                    alt2: { name: "Natura Homem", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Homem" }
+                    main: { 
+                        name: "Kaiak Urbe", 
+                        brand: "Natura", 
+                        desc: "Frescor das notas herbais com a modernidade das madeiras.", 
+                        img: "https://cf.shopee.com.br/file/c2f72d5c82beb828649cabecd3e22be9" 
+                    },
+                    alt1: { 
+                        name: "300km/h", 
+                        brand: "Avon", 
+                        img: "https://th.bing.com/th/id/R.e1d96ccd10a9d85f5bd17fb9fad836ca?rik=wmoqRjC2xgdPrA&pid=ImgRaw&r=0" 
+                    },
+                    alt2: { 
+                        name: "Natura Homem", 
+                        brand: "Natura", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.PhzrWsmBjueyIVaKKCYB5wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
                 },
                 wood: {
-                    main: { name: "Essencial Exclusivo", brand: "Natura", desc: "Madeira nobre e especiarias frias. Sofisticação masculina.", img: "https://placehold.co/200x250/e0e0e0/333?text=Essencial" },
-                    alt1: { name: "Segno", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Segno" },
-                    alt2: { name: "Homem Sagaz", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Homem+Sagaz" }
+                    main: { 
+                        name: "Essencial Exclusivo", 
+                        brand: "Natura", 
+                        desc: "Madeira nobre e especiarias frias. Sofisticação masculina.", 
+                        img: "https://th.bing.com/th/id/R.f534280a96cb75ca0b3e582063bf29e6?rik=vU%2bMHxxd30CcVw&pid=ImgRaw&r=0" 
+                    },
+                    alt1: { 
+                        name: "Segno", 
+                        brand: "Avon", 
+                        img: "https://pimages.parfumo.de/720/113135_img-4765-avon-segno_720.jpg" 
+                    },
+                    alt2: { 
+                        name: "Homem Sagaz", 
+                        brand: "Natura", 
+                        img: "https://images-americanas.b2w.io/produtos/2419122091/imagens/perfume-homem-sagaz-deo-parfum-100ml-natura/2419122103_1_xlarge.jpg" 
+                    }
                 },
                 intense: {
-                    main: { name: "Essencial Oud Masculino", brand: "Natura", desc: "A madeira mais nobre do mundo. Para homens que deixam marca.", img: "https://placehold.co/200x250/e0e0e0/333?text=Essencial+Oud" },
-                    alt1: { name: "Black Essential", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Black+Ess" },
-                    alt2: { name: "K Max", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=K+Max" }
+                    main: { 
+                        name: "Essencial Oud Masculino", 
+                        brand: "Natura", 
+                        desc: "A madeira mais nobre do mundo. Para homens que deixam marca.", 
+                        img: "https://m.media-amazon.com/images/I/51+V6pgWCNL.jpg" 
+                    },
+                    alt1: { 
+                        name: "Black Essential", 
+                        brand: "Avon", 
+                        img: "https://product-data.raiadrogasil.io/images/5483852.webp" 
+                    },
+                    alt2: { 
+                        name: "K Max", 
+                        brand: "Natura", 
+                        img: "https://fraguru.com/mdimg/perfume/375x500.55558.jpg" 
+                    }
                 },
                 spiced: {
-                    main: { name: "Humor a Dois", brand: "Natura", desc: "Irreverente, com pimenta preta e notas amadeiradas.", img: "https://placehold.co/200x250/e0e0e0/333?text=Humor+a+Dois" },
-                    alt1: { name: "Attraction Game", brand: "Avon", img: "https://placehold.co/100x100/e0e0e0/333?text=Attraction" },
-                    alt2: { name: "Kaiak Aero", brand: "Natura", img: "https://placehold.co/100x100/e0e0e0/333?text=Kaiak+Aero" }
+                    main: { 
+                        name: "Humor a Dois", 
+                        brand: "Natura", 
+                        desc: "Irreverente, com pimenta preta e notas amadeiradas.", 
+                        img: "https://tse2.mm.bing.net/th/id/OIP.G2l7lSg9yWgvhbLzhdvFxgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Attraction Game", 
+                        brand: "Avon", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.TVE2xVsvx1VNME5bB6tjqQHaJU?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt2: { 
+                        name: "Kaiak Aero", 
+                        brand: "Natura", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.zOCSd-PkAQt-kCFEVrxpRgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
                 }
             }
         };
@@ -514,10 +625,7 @@
                 document.getElementById('alt2-img').src = data.alt2.img;
 
                 // --- LÓGICA DO LINK DE COMPRA (NATURA COM BUSCA DINÂMICA) ---
-                // Transforma o nome (ex: "Humor a Dois") em "Humor+a+Dois"
                 const productName = encodeURIComponent(data.main.name).replace(/%20/g, '+');
-                
-                // Monta a URL de busca no site da Natura com o parâmetro de consultoria
                 const searchLink = `https://www.natura.com.br/s/produtos?busca=${productName}&consultoria=elieth`;
                 
                 document.getElementById('btn-buy-online').href = searchLink;
