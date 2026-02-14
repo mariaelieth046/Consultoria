@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="https://ivhdtulsakukuuobkfhd.supabase.co/storage/v1/object/public/scripts/v-pixel.js" data-id="2d435f51-fe4b-4e52-a530-4724bf983577" async></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maria Elieth | Consultoria de Fragrâncias</title>
@@ -303,7 +305,7 @@
                 <h2 class="product-name" id="res-name">Nome do Perfume</h2>
                 <p class="product-desc" id="res-desc">Descrição sensorial...</p>
                 
-                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now">
+                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now v-track">
                     Comprar Online Agora
                 </a>
                 <p style="font-size: 0.7rem; color: #999; margin-top: 10px;">Você será redirecionada para minha Loja Natura</p>
@@ -324,8 +326,8 @@
                 </div>
             </div>
 
-            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial">
-                Prefiro falar no WhatsApp
+            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial v-track">
+                Falar com a Consultora
             </a>
         </div>
 
@@ -333,7 +335,6 @@
 
     <script>
         // --- BANCO DE DADOS ATUALIZADO COM IMAGENS REAIS ---
-        // URLs obtidas diretamente dos servidores da Natura (production.na01.natura.com) e Avon (VTEX).
         const database = {
             female: {
                 fresh: {
@@ -502,7 +503,6 @@
                 text: "Como você se descreve hoje?",
                 options: ["Tranquilo(a) e Leve", "Sedutor(a) e Ousado(a)", "Elegante e Sério(a)", "Divertido(a) e Moderno(a)"]
             },
-            // Pergunta Chave (Índice 4)
             {
                 text: "Qual cheiro mais te agrada?",
                 options: ["Cítricos e Ervas (Frescor)", "Doces e Baunilha (Envolvente)", "Madeiras e Couro (Sofisticado)", "Especiarias e Pimenta (Quente)"]
@@ -624,7 +624,7 @@
                 document.getElementById('alt2-brand').innerText = data.alt2.brand;
                 document.getElementById('alt2-img').src = data.alt2.img;
 
-                // --- LÓGICA DO LINK DE COMPRA (NATURA COM BUSCA DINÂMICA) ---
+                // --- LÓGICA DO LINK DE COMPRA ---
                 const productName = encodeURIComponent(data.main.name).replace(/%20/g, '+');
                 const searchLink = `https://www.natura.com.br/s/produtos?busca=${productName}&consultoria=elieth`;
                 
@@ -644,5 +644,4 @@
         };
     </script>
 </body>
-
 </html>
