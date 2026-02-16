@@ -105,11 +105,9 @@ const quiz = {
         this.elements.loading.style.display = 'none';
         this.elements.result.style.display = 'block';
         
-        // Sorteia um perfume aleatório dentro da lista do perfil escolhido
         const listaPerfil = ListaPerfumes[this.gender][this.profile];
         const res = listaPerfil[Math.floor(Math.random() * listaPerfil.length)];
 
-        // Monta o caminho da imagem dinamicamente usando a pasta assets
         const imagePath = `assets/${res.name}.png`;
         document.getElementById('res-img').src = imagePath;
         
@@ -117,12 +115,10 @@ const quiz = {
         document.getElementById('res-name').innerText = res.name;
         document.getElementById('res-desc').innerText = res.desc;
         
-        // Utilizando o módulo LinkGen para preencher os links
         document.getElementById('btn-buy-online').href = LinkGen.getStoreLink(res.name);
         document.getElementById('share-btn').href = LinkGen.getShareResultLink();
         document.getElementById('whatsapp-btn').href = LinkGen.getConsultantLink(res.name);
     }
 };
 
-// Inicializa o quiz quando o DOM carregar
 document.addEventListener('DOMContentLoaded', () => quiz.init());
