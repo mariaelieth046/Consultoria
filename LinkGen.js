@@ -1,25 +1,22 @@
 export const LinkGen = {
-    // Configurações base
     config: {
         whatsappPhone: "558198786412",
         baseStoreLink: "https://www.minhaloja.natura.com/s/produtos?consultoria=elieth&busca=",
-        quizUrl: window.location.href
+        quizUrl: window.location.href,
+        instagramUrl: "https://www.instagram.com/mariaelieth.cosmeticos/"
     },
     
-    // Gera o link de compra na loja Natura
     getStoreLink: function(productName) {
         return this.config.baseStoreLink + encodeURIComponent(productName);
     },
     
-    // Gera o link para compartilhar com amigos via WhatsApp
-    getShareResultLink: function() {
-        const text = `Amiga, veja meu perfume ideal: ${this.config.quizUrl}`;
+    getShareResultLink: function(productName) {
+        const text = `Fiz a Consultoria Olfativa Premium da Elieth e descobri que minha assinatura perfeita é o *${productName}*! \n\nFaça o teste rápido e descubra o seu também:\n${this.config.quizUrl}\n\nAproveite e siga a Elieth no Instagram para mais dicas:\n${this.config.instagramUrl}`;
         return `https://wa.me/?text=${encodeURIComponent(text)}`;
     },
     
-    // Gera o link de contato direto com a consultora
     getConsultantLink: function(productName) {
-        const text = `Oi Elieth! Meu resultado foi: ${productName}`;
+        const text = `Oi Elieth! Terminei o teste e meu resultado foi o ${productName}. Queria saber mais sobre ele.`;
         return `https://wa.me/${this.config.whatsappPhone}?text=${encodeURIComponent(text)}`;
     }
 };
