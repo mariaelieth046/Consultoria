@@ -1,11 +1,11 @@
 export const ListaPerfumes = {
     female: {
         fresh: [
-            { name: "Kaiak Clássico", brand: "Natura", desc: "A energia do frescor vibrante." },
-            { name: "Kaiak Aventura", brand: "Natura", desc: "A energia das notas marinhas com um toque floral." },
-            { name: "Kaiak Oceano", brand: "Natura", desc: "Profundo e refrescante como o mar." },
-            { name: "Kaiak Vital", brand: "Natura", desc: "Sensação de revitalização imediata." },
-            { name: "Kaiak Aero", brand: "Natura", desc: "Vento no rosto e frescor inigualável." },
+            { name: "Kaiak Clássico Feminino", brand: "Natura", desc: "A energia do frescor vibrante." },
+            { name: "Kaiak Aventura Feminino", brand: "Natura", desc: "A energia das notas marinhas com um toque floral." },
+            { name: "Kaiak Oceano Feminino", brand: "Natura", desc: "Profundo e refrescante como o mar." },
+            { name: "Kaiak Vital Feminino", brand: "Natura", desc: "Sensação de revitalização imediata." },
+            { name: "Kaiak Aero Feminino", brand: "Natura", desc: "Vento no rosto e frescor inigualável." },
             { name: "Ekos Frescor Maracujá", brand: "Natura", desc: "O azedinho doce e calmante do maracujá." },
             { name: "Meu Primeiro Humor", brand: "Natura", desc: "Frutado e radiante para todos os dias." }
         ],
@@ -32,11 +32,11 @@ export const ListaPerfumes = {
             { name: "Biografia Assinatura Feminino", brand: "Natura", desc: "Floral delicado com toque de mandarina." }
         ],
         intense: [
-            { name: "Essencial Oud", brand: "Natura", desc: "Intenso, amadeirado e extremamente luxuoso." },
+            { name: "Essencial Oud Feminino", brand: "Natura", desc: "Intenso, amadeirado e extremamente luxuoso." },
             { name: "Essencial Clássico Feminino", brand: "Natura", desc: "Buquê floral com madeiras preciosas." },
             { name: "Essencial Exclusivo Feminino", brand: "Natura", desc: "Criação moderna com notas de rosa e frésia." },
             { name: "Essencial Supreme", brand: "Natura", desc: "Ylang Ylang, ishpink e sensualidade." },
-            { name: "Essencial Mirra", brand: "Natura", desc: "A resina mais nobre com toque de pimenta." },
+            { name: "Essencial Mirra Feminino", brand: "Natura", desc: "A resina mais nobre com toque de pimenta." },
             { name: "Essencial Ato", brand: "Natura", desc: "Acorde do pau-brasil com flor do mandacaru." },
             { name: "Luna Intenso", brand: "Natura", desc: "Chipre marcante e inesquecível." },
             { name: "Una Clássico", brand: "Natura", desc: "Sofisticação de praliné com notas florais." },
@@ -48,12 +48,12 @@ export const ListaPerfumes = {
     male: {
         fresh: [
             { name: "Kaiak Urbe", brand: "Natura", desc: "Equilíbrio entre o frescor herbal e o ritmo da cidade." },
-            { name: "Kaiak Clássico", brand: "Natura", desc: "O frescor cítrico que marcou gerações." },
-            { name: "Kaiak Aventura", brand: "Natura", desc: "Arrebatador como a natureza selvagem." },
-            { name: "Kaiak Oceano", brand: "Natura", desc: "A imensidão do fundo do mar." },
+            { name: "Kaiak Clássico Masculino", brand: "Natura", desc: "O frescor cítrico que marcou gerações." },
+            { name: "Kaiak Aventura Masculino", brand: "Natura", desc: "Arrebatador como a natureza selvagem." },
+            { name: "Kaiak Oceano Masculino", brand: "Natura", desc: "A imensidão do fundo do mar." },
             { name: "Kaiak Pulso", brand: "Natura", desc: "Vibrante e cheio de energia." },
-            { name: "Kaiak Vital", brand: "Natura", desc: "Puro frescor para o dia a dia." },
-            { name: "Kaiak Aero", brand: "Natura", desc: "Impacto gélido das notas tônicas." },
+            { name: "Kaiak Vital Masculino", brand: "Natura", desc: "Puro frescor para o dia a dia." },
+            { name: "Kaiak Aero Masculino", brand: "Natura", desc: "Impacto gélido das notas tônicas." },
             { name: "Sr N Clássico", brand: "Natura", desc: "Frescor tradicional com toque de madeiras." }
         ],
         wood: [
@@ -69,9 +69,9 @@ export const ListaPerfumes = {
             { name: "Biografia Assinatura", brand: "Natura", desc: "Palo santo com musgo de carvalho." }
         ],
         intense: [
-            { name: "Essencial Oud", brand: "Natura", desc: "Máxima sofisticação amadeirada para marcar presença." },
+            { name: "Essencial Oud Masculino", brand: "Natura", desc: "Máxima sofisticação amadeirada para marcar presença." },
             { name: "Essencial Intenso", brand: "Natura", desc: "Ainda mais poder e presença do que o clássico." },
-            { name: "Essencial Mirra", brand: "Natura", desc: "O mistério da mirra do oriente e da amazônia." },
+            { name: "Essencial Mirra Masculino", brand: "Natura", desc: "O mistério da mirra do oriente e da amazônia." },
             { name: "Essencial Único", brand: "Natura", desc: "A gota mais pura da copaíba e do vetiver." },
             { name: "Essencial Palo Santo", brand: "Natura", desc: "Madeira sagrada com cumaru." },
             { name: "Essencial Elixir", brand: "Natura", desc: "Couro, conhaque e madeiras intensas." },
