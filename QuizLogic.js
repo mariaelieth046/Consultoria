@@ -6,7 +6,7 @@ const quiz = {
     gender: null,
     profile: null,
     step: 0,
-    scores: [0, 0, 0, 0], // Placar real das 4 categorias olfativas
+    scores: [0, 0, 0, 0],
     
     elements: {
         intro: document.getElementById('intro-section'),
@@ -60,7 +60,6 @@ const quiz = {
                 const div = document.createElement('div');
                 div.className = "option-card";
                 div.innerHTML = `${opt} <span>→</span>`;
-                // Ao clicar, envia o índice da resposta (0, 1, 2 ou 3)
                 div.onclick = () => this.handleAnswer(idx);
                 document.getElementById('q-options').appendChild(div);
             });
@@ -73,23 +72,19 @@ const quiz = {
     },
 
     handleAnswer: function(idx) {
-        // Adiciona 1 ponto na categoria escolhida
         this.scores[idx]++;
 
-        // Se for a última pergunta, calcula o vencedor
         if (this.step === QuizQuestions.length) {
             let maxIndex = 0;
             let maxScore = 0;
             
-            // Verifica qual categoria teve a maior pontuação
             for (let i = 0; i < this.scores.length; i++) {
                 if (this.scores[i] > maxScore) {
                     maxScore = this.scores[i];
-                    maxIndex = i; // Salva o índice vencedor
+                    maxIndex = i;
                 }
             }
 
-            // Mapeia o índice vencedor para a família olfativa correta
             const profiles = (this.gender === 'female') ? ['fresh', 'floral', 'intense', 'sweet'] : ['fresh', 'wood', 'intense', 'spiced'];
             this.profile = profiles[maxIndex];
         }
@@ -135,7 +130,8 @@ const quiz = {
         document.getElementById('res-desc').innerText = res.desc;
         
         document.getElementById('btn-buy-online').href = LinkGen.getStoreLink(res.name);
-        document.getElementById('share-btn').href = LinkGen.getShareResultLink();
+        // Enviando o res.name para o LinkGen construir a mensagem
+        document.getElementById('share-btn').href = LinkGen.getShareResultLink(res.name);
         document.getElementById('whatsapp-btn').href = LinkGen.getConsultantLink(res.name);
     }
 };
