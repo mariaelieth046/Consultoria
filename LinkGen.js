@@ -11,7 +11,8 @@ export const LinkGen = {
     },
     
     getShareResultLink: function(productName) {
-        const text = `Fiz a Consultoria Olfativa Premium da Elieth e descobri que minha assinatura perfeita é o *${productName}*! \n\nFaça o teste rápido e descubra o seu também:\n${this.config.quizUrl}\n\nAproveite e siga a Elieth no Instagram para mais dicas:\n${this.config.instagramUrl}`;
+        // Mensagem completa com resultado, link do quiz e link do instagram
+        const text = `Minha amiga, meu resultado foi o *${productName}*! ✨\n\nFaz o teste você também pra descobrir seu perfume ideal aqui:\n${this.config.quizUrl}\n\nE aproveita pra seguir a Elieth no Instagram, ela dá dicas ótimas:\n${this.config.instagramUrl}`;
         return `https://wa.me/?text=${encodeURIComponent(text)}`;
     },
     
