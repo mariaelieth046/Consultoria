@@ -1,125 +1,117 @@
-import { ListaPerfumes } from './ListaPerfumes.js';
-import { QuizQuestions } from './QuizQuestions.js';
-import { LinkGen } from './LinkGen.js';
-
-const quiz = {
-    gender: null,
-    profile: null,
-    step: 0,
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script src="https://ivhdtulsakukuuobkfhd.supabase.co/storage/v1/object/public/scripts/v-pixel.js" data-id="dff01a5f-0ae5-46e2-a7fe-af2144bdba88" async></script>
     
-    elements: {
-        intro: document.getElementById('intro-section'),
-        quiz: document.getElementById('quiz-section'),
-        loading: document.getElementById('loading-section'),
-        result: document.getElementById('result-section'),
-        progress: document.getElementById('progress-container'),
-        bar: document.getElementById('progress-bar'),
-        loadText: document.getElementById('loading-text'),
-        loadSub: document.getElementById('loading-sub'),
-        btnStart: document.getElementById('btn-start'),
-        btnRestart: document.getElementById('btn-restart')
-    },
-
-    init: function() {
-        this.elements.btnStart.onclick = () => this.start();
-        this.elements.btnRestart.onclick = () => location.reload();
-    },
-
-    start: function() { 
-        this.elements.intro.style.display = 'none'; 
-        this.elements.progress.style.display = 'block';
-        this.elements.quiz.style.display = 'flex'; 
-        this.askGender(); 
-    },
-
-    askGender: function() {
-        document.getElementById('q-text').innerText = "Como você se identifica?";
-        document.getElementById('q-options').innerHTML = `
-            <div class="option-card" data-gender="female">Feminino <span>→</span></div>
-            <div class="option-card" data-gender="male">Masculino <span>→</span></div>
-        `;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Elieth | Consultoria Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --color-primary: #263b2f; --color-accent: #cfa86e; --color-bg: #fdfcfb; --color-text: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background-color: #f5f5f5; color: var(--color-text); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         
-        const options = document.querySelectorAll('#q-options .option-card');
-        options.forEach(opt => {
-            opt.onclick = () => {
-                this.gender = opt.getAttribute('data-gender');
-                this.nextQuestion();
-            };
-        });
-    },
+        .magazine-page { width: 100%; max-width: 600px; background: var(--color-bg); min-height: 100vh; padding: 40px; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        
+        header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .header-brand { display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .logo-img { max-height: 40px; width: auto; display: block; }
+        h2.brand-name { font-family: 'Playfair Display', serif; color: var(--color-primary); letter-spacing: 3px; font-size: 1.2rem; }
+        
+        #loading-section { display: none; text-align: center; flex: 1; flex-direction: column; justify-content: center; }
+        .spinner { width: 45px; height: 45px; border: 3px solid #eee; border-top: 3px solid var(--color-accent); border-radius: 50%; margin: 20px auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    nextQuestion: function() {
-        if (this.step < QuizQuestions.length) {
-            const q = QuizQuestions[this.step];
-            document.getElementById('q-number').innerText = `Pergunta ${this.step + 1} de ${QuizQuestions.length}`;
-            document.getElementById('q-text').innerText = q.text;
-            document.getElementById('q-options').innerHTML = "";
-            
-            q.options.forEach((opt, idx) => {
-                const div = document.createElement('div');
-                div.className = "option-card";
-                div.innerHTML = `${opt} <span>→</span>`;
-                div.onclick = () => this.handleAnswer(idx);
-                document.getElementById('q-options').appendChild(div);
-            });
-            
-            this.step++;
-            this.elements.bar.style.width = (this.step * 10) + "%";
-        } else { 
-            this.preShowResult(); 
+        .progress-container { width: 100%; height: 3px; background: #eee; margin-bottom: 25px; display: none; }
+        .progress-bar { height: 100%; background: var(--color-accent); width: 0%; transition: 0.4s; }
+
+        .btn-editorial { background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); padding: 16px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; display: block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; margin-top: 15px; transition: 0.3s; }
+        .btn-shop-now { background: var(--color-primary); color: #fff; padding: 20px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; cursor: pointer; display: block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; margin-top: 20px; border: none; }
+        .btn-share { background-color: #25D366; color: white; border: none; margin-top: 20px; }
+        .btn-restart { background: none; border: none; color: #bbb; text-decoration: underline; font-size: 0.7rem; margin-top: 35px; cursor: pointer; text-transform: uppercase; }
+
+        #result-section { display: none; text-align: center; }
+        .main-product { border: 1px solid var(--color-accent); padding: 30px 20px; margin-bottom: 20px; background: #fff; position: relative; }
+        
+        /* NOVO CSS DAS IMAGENS */
+        .product-image { 
+            width: 100%; 
+            max-width: 190px; 
+            height: 220px; /* Altura fixa para padronização */
+            object-fit: contain; /* Impede que a imagem achate ou corte */
+            margin-bottom: 15px; 
         }
-    },
-
-    handleAnswer: function(idx) {
-        if (this.step === QuizQuestions.length) {
-            const profiles = (this.gender === 'female') ? ['fresh', 'floral', 'intense', 'sweet'] : ['fresh', 'wood', 'intense', 'spiced'];
-            this.profile = profiles[idx] || profiles[0];
-        }
-        this.nextQuestion();
-    },
-
-    preShowResult: function() {
-        this.elements.quiz.style.display = 'none';
-        this.elements.progress.style.display = 'none';
-        this.elements.loading.style.display = 'flex';
         
-        const steps = [
-            {t: "Analisando...", s: "Estilo de vida"}, 
-            {t: "Buscando...", s: "Melhor fragrância"}, 
-            {t: "Pronto!", s: "Curadoria finalizada"}
-        ];
-        let i = 0;
-        
-        const interval = setInterval(() => {
-            this.elements.loadText.innerText = steps[i].t;
-            this.elements.loadSub.innerText = steps[i].s;
-            i++;
-            if (i >= steps.length) { 
-                clearInterval(interval); 
-                this.showResult(); 
-            }
-        }, 1000);
-    },
+        .match-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: white; padding: 4px 15px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; }
+        .pro-tip { background: #fdf8f2; border-left: 4px solid var(--color-accent); padding: 20px; margin: 25px 0; font-size: 0.85rem; color: #555; text-align: left; }
 
-    showResult: function() {
-        this.elements.loading.style.display = 'none';
-        this.elements.result.style.display = 'block';
-        
-        // Sorteia um perfume aleatório dentro da lista do perfil escolhido
-        const listaPerfil = ListaPerfumes[this.gender][this.profile];
-        const res = listaPerfil[Math.floor(Math.random() * listaPerfil.length)];
+        #quiz-section { display: none; flex: 1; flex-direction: column; }
+        .option-card { background: #fff; border: 1px solid #eee; padding: 18px; cursor: pointer; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .option-card:hover { border-color: var(--color-accent); }
+    </style>
+</head>
+<body>
 
-        document.getElementById('res-img').src = res.img;
-        document.getElementById('res-brand').innerText = res.brand;
-        document.getElementById('res-name').innerText = res.name;
-        document.getElementById('res-desc').innerText = res.desc;
-        
-        // Utilizando o módulo LinkGen
-        document.getElementById('btn-buy-online').href = LinkGen.getStoreLink(res.name);
-        document.getElementById('share-btn').href = LinkGen.getShareResultLink();
-        document.getElementById('whatsapp-btn').href = LinkGen.getConsultantLink(res.name);
-    }
-};
+    <div class="magazine-page">
+        <header>
+            <div class="header-brand">
+                <img src="logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+                <h2 class="brand-name">MARIA ELIETH</h2>
+            </div>
+            <p style="font-size: 0.6rem; color: #999; text-transform: uppercase; margin-top: 5px;">Consultoria de Fragrâncias Personalizada</p>
+        </header>
 
-// Inicializa o quiz quando o DOM carregar
-document.addEventListener('DOMContentLoaded', () => quiz.init());
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div id="intro-section" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="font-family: 'Playfair Display'; font-size: 2.4rem; line-height: 1.1; margin-bottom: 20px; color: var(--color-primary);">A busca pela sua assinatura termina aqui.</h1>
+            <p style="font-style: italic; color: #777; margin-bottom: 40px;">Inicie nossa análise profunda para descobrir seu par perfeito.</p>
+            <button class="btn-editorial" id="btn-start" style="background: var(--color-primary); color: #fff;">Começar Consultoria</button>
+        </div>
+
+        <div id="quiz-section">
+            <span id="q-number" style="font-size: 0.7rem; color: var(--color-accent); font-weight: bold; text-transform: uppercase;"></span>
+            <h2 id="q-text" style="font-family: 'Playfair Display'; font-size: 1.7rem; margin: 15px 0 35px; color: var(--color-primary);"></h2>
+            <div id="q-options"></div>
+        </div>
+
+        <div id="loading-section">
+            <div class="spinner"></div>
+            <h3 id="loading-text" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">Processando perfil...</h3>
+            <p id="loading-sub" style="font-size: 0.75rem; color: #999; margin-top: 15px; font-style: italic;">Avaliando famílias olfativas...</p>
+        </div>
+
+        <div id="result-section">
+            <div class="main-product">
+                <div class="match-label">Sua Assinatura Olfativa</div>
+                <img src="" id="res-img" class="product-image">
+                <p id="res-brand" style="font-size: 0.7rem; color: #bbb; text-transform: uppercase;"></p>
+                <h2 id="res-name" style="font-family: 'Playfair Display'; font-size: 2rem; margin: 10px 0; color: var(--color-primary);"></h2>
+                <p id="res-desc" style="font-size: 1rem; font-style: italic; color: #555;"></p>
+                
+                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now v-track">Comprar Online</a>
+                <p style="font-size: 0.7rem; color: #d9534f; margin-top: 12px; font-weight: bold;">Fogo Item com alta procura hoje.</p>
+            </div>
+
+            <a href="#" target="_blank" id="share-btn" class="btn-editorial btn-share v-track">
+                COMPARTILHAR COM UMA AMIGA
+            </a>
+
+            <div class="pro-tip">
+                <strong>Dica de Especialista:</strong>
+                "Perfume não se esfrega! Ao esfregar os pulsos, você altera o cheiro original. Apenas borrife e deixe secar naturalmente."
+            </div>
+
+            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial v-track" style="font-size: 0.7rem;">Falar com a Consultora</a>
+            
+            <button class="btn-restart" id="btn-restart">Refazer a jornada</button>
+        </div>
+    </div>
+
+    <script type="module" src="QuizLogic.js"></script>
+</body>
+</html>
